@@ -19,7 +19,8 @@ Local $box_directory = "C:\Users\" & @Username & "\Box\My Documents\"
 
 FileChangeDir("C:\Users\" & @Username & "\Documents\FlashBack Movies\")
 Local $hSearch = FileFindFirstFile("*.fbr")
-Local $file_name = FileFindNextFile($hSearch)
+Local $fbr_name = FileFindNextFile($hSearch)
+Local $file_name = StringLeft($fbr_name, StringLen($fbr_name) - 4)
 
 ; Script Start
 
