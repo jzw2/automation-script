@@ -14,12 +14,16 @@
 Local $usernames[144] = ["physical-modified","virtual-existing","virtual-modified", "virtual-modified", "virtual-modified", "physical-modified", "physical-existing", "virtual-existing", "virtual-modified", "physical-existing", "physical-existing", "physical-existing", "virtual-modified", "physical-existing", "virtual-modified", "virtual-existing", "physical-modified", "physical-modified", "virtual-existing", "physical-existing", "virtual-existing", "physical-existing", "virtual-existing", "physical-existing", "virtual-existing", "virtual-modified", "physical-existing", "physical-existing", "physical-existing", "physical-existing", "virtual-modified", "physical-modified", "virtual-existing", "virtual-modified", "virtual-existing", "physical-modified", "physical-existing", "physical-modified", "virtual-modified", "virtual-existing", "virtual-modified", "physical-modified", "physical-modified", "virtual-existing", "physical-modified", "physical-modified", "physical-modified", "physical-modified", "physical-existing", "physical-modified", "physical-existing", "virtual-existing", "virtual-existing", "physical-existing", "virtual-modified", "virtual-existing", "physical-existing", "physical-existing", "virtual-existing", "virtual-existing", "physical-existing", "physical-existing", "virtual-modified", "virtual-modified", "virtual-existing", "physical-existing", "virtual-existing", "physical-modified", "virtual-existing", "physical-existing", "virtual-existing", "virtual-existing", "physical-existing", "virtual-modified", "physical-modified", "physical-modified", "virtual-modified", "physical-modified", "virtual-modified", "virtual-existing", "physical-modified", "virtual-modified", "virtual-existing", "physical-modified", "virtual-modified", "virtual-existing", "virtual-existing", "virtual-existing", "virtual-modified", "physical-existing", "physical-modified", "virtual-modified", "virtual-modified", "physical-existing", "physical-modified", "virtual-existing", "physical-existing", "virtual-modified", "virtual-modified", "virtual-modified", "virtual-existing", "physical-modified", "physical-existing", "virtual-existing", "physical-modified", "virtual-existing", "physical-modified", "physical-existing", "physical-modified", "physical-existing", "virtual-modified", "physical-modified", "physical-modified", "virtual-modified", "virtual-existing", "physical-existing", "virtual-existing", "physical-modified", "virtual-existing", "virtual-modified", "virtual-modified", "physical-existing", "physical-modified", "virtual-modified", "virtual-existing", "virtual-existing", "physical-modified", "physical-existing", "virtual-existing", "virtual-modified", "physical-modified", "physical-existing", "physical-existing", "physical-existing", "physical-existing", "physical-modified", "virtual-modified", "physical-modified", "physical-modified", "virtual-modified", "physical-modified", "virtual-modified", "virtual-modified", "virtual-modified"]
 
 ; Local $file_name = "test_abc"
-Local $index = Number(StringTrimLeft(@Username, 2)) - 1
-Local $ending = $usernames[$index]
-Local $file_name = @UserName & $ending
+
 
 Local $exports_directory = "C:\Users\" & @Username & "\Documents\BB FlashBack Exports\"
 Local $box_directory = "C:\Users\" & @Username & "\Box\My Documents\"
+
+
+FileChangeDir("C:\Users\" & @Username & "\Documents\BB FlashBack Exports\")
+Local $hSearch = FileFindFirstFile("*.fbr")
+Local $file_name = FileFindNextFile($hSearch)
+
 
 
 
@@ -41,7 +45,7 @@ WinWaitActive("Add FlashBack Movies")
 
 Sleep(1000)
 
-ControlSetText("Add FlashBack Movies", "", "Edit1", $file_name & ".fbr")
+ControlSetText("Add FlashBack Movies", "", "Edit1", $file_name)
 Send("!O")
 ;WinWaitActive("Add FlashBack Movies")
 ControlClick("FlashBack Express 5 Batch Export","", "TButton10")
